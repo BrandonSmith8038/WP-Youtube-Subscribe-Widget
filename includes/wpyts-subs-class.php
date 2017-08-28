@@ -35,7 +35,7 @@ class WP_Youtbe_Subscribe_Widget extends WP_Widget {
                 class="g-ytsubscribe" 
                 data-channel="' . $instance['channel'] . '" 
                 data-layout="' . $instance['layout']  . '" 
-                data-count="default">
+                data-count="' . $instance['showCount'] . '">
             </div>';
         echo $args['after_widget'];//Whatever you want to display after widget (</div>)
 	}
@@ -52,7 +52,9 @@ class WP_Youtbe_Subscribe_Widget extends WP_Widget {
         
         $channel = ! empty( $instance['channel'] ) ? $instance['channel'] : esc_html__( 'wheretheybuck', 'wpyts_domain' );
         
-        $layout = ! empty( $instance['layout'] ) ? $instance['layout'] : esc_html__( 'wheretheybuck', 'wpyts_domain' );
+        $layout = ! empty( $instance['layout'] ) ? $instance['layout'] : esc_html__( 'default', 'wpyts_domain' );
+        
+        $showCount = ! empty( $instance['showCount'] ) ? $instance['showCount'] : esc_html__( 'default', 'wpyts_domain' );
         
         ?>
         <!-- Title -->
@@ -100,6 +102,24 @@ class WP_Youtbe_Subscribe_Widget extends WP_Widget {
             </option> 
             </select>
 		</p>
+        <!-- Show Count -->
+		<p>
+		    <label for="<?php echo esc_attr( $this->get_field_id( 'showCount' ) ); ?>">
+                <?php esc_attr_e( 'Show Count:', 'wpyts_domain' ); ?>
+            </label> 
+
+		    <select 
+            class="widefat" 
+            id="<?php echo esc_attr( $this->get_field_id( 'showCount' ) ); ?>" 
+            name="<?php echo esc_attr( $this->get_field_name( 'showCount' ) ); ?>">
+            <option value="default" <?php echo ($layout == 'default') ? 'selected' : ''; ?>>
+                Default
+            </option> 
+            <option value="hidden" <?php echo ($layout == 'hidden') ? 'selected' : ''; ?>>
+                Hidden
+            </option> 
+            </select>
+		</p>
 		<?php 
 	}
 
@@ -118,6 +138,7 @@ class WP_Youtbe_Subscribe_Widget extends WP_Widget {
 		$instance['title'] = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
 		$instance['channel'] = ( ! empty( $new_instance['channel'] ) ) ? strip_tags( $new_instance['channel'] ) : '';
 		$instance['layout'] = ( ! empty( $new_instance['layout'] ) ) ? strip_tags( $new_instance['layout'] ) : '';
+		$instance['showCount'] = ( ! empty( $new_instance['showCount'] ) ) ? strip_tags( $new_instance['showCount'] ) : '';
 
 		return $instance;
 	}
