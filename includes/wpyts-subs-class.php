@@ -112,10 +112,10 @@ class WP_Youtbe_Subscribe_Widget extends WP_Widget {
             class="widefat" 
             id="<?php echo esc_attr( $this->get_field_id( 'showCount' ) ); ?>" 
             name="<?php echo esc_attr( $this->get_field_name( 'showCount' ) ); ?>">
-            <option value="default" <?php echo ($layout == 'default') ? 'selected' : ''; ?>>
+            <option value="default" <?php echo ($count == 'default') ? 'selected' : ''; ?>>
                 Default
             </option> 
-            <option value="hidden" <?php echo ($layout == 'hidden') ? 'selected' : ''; ?>>
+            <option value="hidden" <?php echo ($count == 'hidden') ? 'selected' : ''; ?>>
                 Hidden
             </option> 
             </select>
